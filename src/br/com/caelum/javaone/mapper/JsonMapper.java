@@ -22,9 +22,7 @@ public class JsonMapper {
 	}
 
 	public List<String> toJson(List<?> list) {
-
 		List<String> lines = new ArrayList<>();
-		
 		for (Object value : list) {
 			lines.add(new JsonObject(value).toString());
 		}

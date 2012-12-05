@@ -18,7 +18,7 @@ public class Main {
 			System.out.println("What to do?");
 			System.out.println("1 - Generate mass");
 			System.out.println("2 - Convert to Json (single thread)");
-			System.out.println("3 - 3Convert to Json (Multi thread)");
+			System.out.println("3 - Convert to Json (Multi thread)");
 			System.out.println("4 - Convert to Json (Fork/Join)");
 			System.out.println("5 - Exit");
 			System.out.println();
@@ -35,18 +35,25 @@ public class Main {
 				break;
 			}
 			case 2: {
-				convert(new JsonSequentialConverter());
+				System.out.println("How many iterations? (int)");
+				int count = sc.nextInt();
+				convert(new JsonSequentialConverter(count));
 				break;
 			}
 			case 3:{
-				convert(new JsonMultiThreadConverter());
+				System.out.println("How many iterations? (int)");
+				int count = sc.nextInt();
+				convert(new JsonMultiThreadConverter(count));
 				break;
 			}
 			case 4:{
-				convert(new JsonForkJoinConverter());
+				System.out.println("How many iterations? (int)");
+				int count = sc.nextInt();
+				convert(new JsonForkJoinConverter(count));
 				break;
 			}
 			case 5:
+				sc.close();
 				System.exit(0);
 			}
 			System.out.println("\n========================================================\n");

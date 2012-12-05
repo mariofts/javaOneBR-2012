@@ -3,18 +3,18 @@ package br.com.caelum.javaone.converter;
 import java.util.List;
 
 import br.com.caelum.javaone.mapper.JsonMapper;
-import br.com.caelum.javaone.model.Venda;
+import br.com.caelum.javaone.model.Sale;
 
 public class JsonSequentialConverter extends JsonConverter {
 
+	public JsonSequentialConverter(int count) {
+		super(count);
+	}
+
 	@Override
-	protected List<String> convertToJson(List<Venda> vendas) {
-		System.out.println("Convert to json....");
-		
+	protected List<String> convertToJson(List<Sale> vendas) {
 		JsonMapper jsonMapper = new JsonMapper();
 		List<String> jsons = jsonMapper.toJson(vendas);
-	
-		System.out.println("Finished!\n	");
 		return jsons;
 	}
 

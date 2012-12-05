@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Random;
 
 import br.com.caelum.javaone.mapper.CSVMapper;
-import br.com.caelum.javaone.model.Venda;
+import br.com.caelum.javaone.model.Sale;
 
 public class MassGenerator {
 	
@@ -19,39 +19,35 @@ public class MassGenerator {
 	
 	private static String[] prods = {"caneta","cartolina","lápis","lapiseira", "grampeador", "caderno", "fichario"};
 	private static String[] cores = {"azul","branco","preto", "verde","vermelho","roxo", "cinza"}; 	
-	
-	public static void main(String[] args) throws FileNotFoundException {
-		new MassGenerator().generate(100);
-	}
 
 	public void generate(int size) throws FileNotFoundException {
-		List<Venda> vendas = generateData(size);
+		List<Sale> vendas = generateData(size);
 		writeToCSVFile(vendas);
 		System.out.println("Generated " + size + " sales...");
 	}
 
-	private void writeToCSVFile(List<Venda> vendas) throws FileNotFoundException {
+	private void writeToCSVFile(List<Sale> vendas) throws FileNotFoundException {
 		
 		PrintStream ps = new PrintStream("vendas.csv");
-		for (Venda venda : vendas) {
+		for (Sale venda : vendas) {
 			String line = new CSVMapper().toCsv(venda);
 			ps.println(line.toString());
 		}
 		ps.close();
 	}
 
-	private List<Venda> generateData(int qtde) {
-		List<Venda> vendas = new ArrayList<>();
+	private List<Sale> generateData(int qtde) {
+		List<Sale> vendas = new ArrayList<>();
 		
 		Calendar data = Calendar.getInstance();
 		
 		for(int i = 0; i< qtde; i++){
-			Venda v = new Venda();
-			v.setDescricao(getRandomDesc());
-			v.setNumero(i + 1);
-			v.setData(data);
-			v.setPreco(getRandomPreco());
-			v.setQuantidade(getRandomQtde());
+			Sale v = new Sale();
+			v.setDescription(getRandomDesc());
+			v.setNumber(i + 1);
+			v.setDate(data);
+			v.setPrice(getRandomPreco());
+			v.setAmount(getRandomQtde());
 			v.setTerminal(getRandomTerm());
 			vendas.add(v);
 		}
