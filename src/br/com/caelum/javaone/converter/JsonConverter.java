@@ -44,8 +44,28 @@ public abstract class JsonConverter {
 //		System.out.printf("Converted %d objects %n", jsons.size());
 		Arrays.sort(times);
 		System.out.println("Times => " + Arrays.toString(times));
+		
+		System.out.printf("Average time : [ %d ]%n", printAvg(times,count));
+		
 		System.out.println();
 		
+	}
+
+	/**
+	 * Prints the average time.
+	 * ignores the first and the last result
+	 * 
+	 * @param times
+	 * @param iterations 
+	 * @return 
+	 */
+	private long printAvg(long[] times, int iterations) {
+		long sum = 0;
+		
+		for (int i = 1; i < times.length -1; i++) {
+			sum +=times[i];
+		}
+		return sum / (iterations - 2 > 0 ? iterations - 2 : 1 );
 	}
 
 	protected abstract List<String> convertToJson(List<Sale> vendas) throws Exception;

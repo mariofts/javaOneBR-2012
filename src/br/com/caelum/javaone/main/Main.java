@@ -54,6 +54,7 @@ public class Main {
 			}
 			case 5:
 				sc.close();
+				System.out.println("Bye!");
 				System.exit(0);
 			}
 			System.out.println("\n========================================================\n");

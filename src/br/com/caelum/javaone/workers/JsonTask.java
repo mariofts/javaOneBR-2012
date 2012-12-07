@@ -18,9 +18,7 @@ public class JsonTask extends RecursiveTask<List<String>>{
 
 	@Override
 	protected List<String> compute() {
-		
 		List<String> jsons = new ArrayList<>();
-		
         int size = list.size();
 		if ( size < THRESHOLD){
 			jsons.addAll(new JsonMapper().toJson(list));
