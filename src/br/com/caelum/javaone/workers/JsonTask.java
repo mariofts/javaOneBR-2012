@@ -11,22 +11,33 @@ public class JsonTask extends RecursiveTask<List<String>>{
 
 	private final int THRESHOLD = 10000;
 	private List<Sale> list;
+	
+	private int from;
+	private int to;
 
 	public JsonTask(List<Sale> list) {
 		this.list = list;
 	}
 
+	public JsonTask(List<Sale> list, int from, int to) {
+		this(list);
+		this.from = from;
+		this.to = to;
+	}
+
 	@Override
 	protected List<String> compute() {
 		List<String> jsons = new ArrayList<>();
-        int size = list.size();
-		if ( size < THRESHOLD){
+		if (to - from < THRESHOLD){
 			jsons.addAll(new JsonMapper().toJson(list));
 		} else{
-        	JsonTask jsonTaskFirst =  new JsonTask(list.subList(0, size / 2));
+		
+		int split = (from + to)/2	
+			
+        	JsonTask jsonTaskFirst =  new JsonTask(list, from, split);
         	jsonTaskFirst.fork();
         	
-        	JsonTask jsonTaskSecond = new JsonTask(list.subList(size / 2, size));
+        	JsonTask jsonTaskSecond = new JsonTask(list, from + split, to);
         	
         	jsons.addAll(jsonTaskSecond.compute());
         	jsons.addAll(jsonTaskFirst.join());
